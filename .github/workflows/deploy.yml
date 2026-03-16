@@ -35,3 +35,20 @@ jobs:
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
           vercel-args: '--prod'
+
+  # بديل: النشر المباشر بدون GitHub Actions
+  deploy-direct:
+    runs-on: ubuntu-latest
+    if: ${{ always() && needs.deploy.result == 'failure' }}
+    needs: deploy
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy via Vercel CLI
+        run: |
+          npm i -g vercel
+          vercel --prod --yes --token ${{ secrets.VERCEL_TOKEN }}
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
