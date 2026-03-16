@@ -1,0 +1,47 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# رائد نيوم - إعدادات Render
+# Raed Neom - Render Configuration
+# ═══════════════════════════════════════════════════════════════════════════════
+
+services:
+  # ─────────────────────────────────────────────────────────────────────────────
+  # Web Service - Next.js Frontend
+  # ─────────────────────────────────────────────────────────────────────────────
+  - type: web
+    name: raed-neom-frontend
+    runtime: node
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    env: node
+    plan: free
+    branch: master
+    healthCheckPath: /
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: OPENROUTER_API_KEY
+        sync: false
+      - key: NEXT_PUBLIC_BACKEND_URL
+        value: https://raed-neom-backend.onrender.com
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # Backend Service - Python FastAPI (اختياري)
+  # ─────────────────────────────────────────────────────────────────────────────
+  - type: web
+    name: raed-neom-backend
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    plan: free
+    branch: master
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: TELEGRAM_TOKEN
+        sync: false
+      - key: ADMIN_CHAT_ID
+        sync: false

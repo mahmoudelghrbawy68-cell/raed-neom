@@ -1,0 +1,26 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# AI Edu App - Python Requirements (Fixed)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# Framework
+fastapi>=0.109.0
+uvicorn[standard]>=0.27.0
+
+# WebSocket
+websockets>=12.0
+
+# HTTP Client
+httpx>=0.26.0
+
+# OpenAI
+openai>=1.10.0
+
+# Environment
+python-dotenv>=1.0.0
+
+# Validation
+pydantic>=2.5.0
+
+# Database (optional)
+# sqlalchemy>=2.0.0
+# asyncpg>=0.29.0

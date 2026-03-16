@@ -1,0 +1,18 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# رائد نيوم - إعدادات Railway
+# Raed Neom - Railway Configuration
+# ═══════════════════════════════════════════════════════════════════════════════
+
+[build]
+builder = "nixpacks"
+buildCommand = "npm install && npm run build"
+
+[deploy]
+startCommand = "npm start"
+healthcheckPath = "/"
+healthcheckTimeout = 300
+restartPolicyType = "on_failure"
+restartPolicyMaxRetries = 3
+
+[env]
+NODE_ENV = "production"
